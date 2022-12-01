@@ -1,0 +1,56 @@
+<div class="parcel-list" (window:scroll)="onScroll()">
+  <div class="filter-section">
+    <app-country-selector [countries]="countryList" (onSelected)="onCountrySelected($event)"></app-country-selector>
+
+    <mat-form-field class="description-filter">
+      <mat-label>Filter by description</mat-label>
+      <input matInput type="text" [(ngModel)]="descriptionInput" (input)="onDescriptionInputChange()">
+      <button *ngIf="descriptionInput" matSuffix mat-icon-button aria-label="Clear" (click)="descriptionInput=''; onDescriptionInputChange()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <table mat-table [dataSource]="loadedParcels" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="sku">
+      <th mat-header-cell *matHeaderCellDef> SKU </th>
+      <td mat-cell *matCellDef="let element"> {{element.sku}} </td>
+    </ng-container>
+
+    <!-- Delivery Date Column -->
+    <ng-container matColumnDef="deliveryDate">
+      <th mat-header-cell *matHeaderCellDef> Delivery Date </th>
+      <td mat-cell *matCellDef="let element"> {{ element.deliveryDate | date:'medium' }} </td>
+    </ng-container>
+
+    <!-- Country Column -->
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef> Country </th>
+      <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+    </ng-container>
+
+    <!-- Town Column -->
+    <ng-container matColumnDef="town">
+      <th mat-header-cell *matHeaderCellDef> Town </th>
+      <td mat-cell *matCellDef="let element"> {{element.town}} </td>
+    </ng-container>
+
+    <!-- Address Column -->
+    <ng-container matColumnDef="streetAddress">
+      <th mat-header-cell *matHeaderCellDef> Address </th>
+      <td mat-cell *matCellDef="let element"> {{element.streetAddress}} </td>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedParcelColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedParcelColumns;"></tr>
+  </table>
+</div>
+

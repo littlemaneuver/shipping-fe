@@ -1,0 +1,43 @@
+<div class="parcel-creation-form">
+  <h4>Add parcel</h4>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div>
+      <mat-form-field appearance="fill" [style.minWidth.px]=248>
+        <mat-label>SKU</mat-label>
+        <input matInput maxlength="10" placeholder="SKU00000" required formControlName="sku">
+      </mat-form-field>
+    </div>
+    <app-country-selector [countries]="countryList" (onSelected)="onCountrySelected($event)"></app-country-selector>
+    <div>
+      <mat-form-field appearance="fill" [style.minWidth.px]=248>
+        <mat-label>Town</mat-label>
+        <input matInput maxlength="255" placeholder="Tallinn" required formControlName="town">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill" [style.minWidth.px]=248>
+        <mat-label>Street Address</mat-label>
+        <input matInput maxlength="255" placeholder="Narva mnt" required formControlName="streetAddress">
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Delivery Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="deliveryDate" required>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div>
+      <mat-form-field appearance="fill" [style.minWidth.px]=248>
+        <mat-label>Description</mat-label>
+        <textarea matInput maxlength="255" placeholder="Comment" formControlName="description"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-raised-button color="accent" type="submit" [disabled]="addingInProgress">Create</button>
+    </div>
+    <mat-error *ngIf="errorMessage">
+      {{errorMessage}}
+    </mat-error>
+  </form>
+</div>

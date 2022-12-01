@@ -1,0 +1,10 @@
+.parcel-list {
+  padding-top: 16px;
+}
+
+.parcel-list .filter-section {
+  display: flex;
+}
+.parcel-list .filter-section .description-filter {
+  margin-left: 24px;
+}
